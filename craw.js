@@ -1,6 +1,5 @@
 const shortid = require('shortid');
 const Nightmare = require('nightmare');		
-const vo = require('vo');
 const async = require('async');
 let nightmare = Nightmare({ show: true });
 const downloader = require('image-downloader');
@@ -64,9 +63,9 @@ function crawl(arr,cb){
                     obj['address'] = address;
                     obj['district'] = district;
                     obj['octime'] = octime;
-                    obj['rate'] = rate;
-                    obj['lat'] = lat;
-                    obj['long'] = long;
+                    obj['rate'] = parseFloat(rate);
+                    obj['lat'] = parseFloat(lat);
+                    obj['long'] = parseFloat(long);
                     obj['image'] = image;
                     return obj;
                 }catch(err){
@@ -93,7 +92,7 @@ function crawl(arr,cb){
                }
              });
     }
-
+    // so luong web truy cap 1 luc
     async.mapLimit(arr,2,test,function(err,res){
         cb(null,res);
     });
@@ -104,6 +103,7 @@ nightmare
     .click('.signin')
     .wait(1000)
     .insert('#Email','systemec2017@gmail.com')
+    .wait(1000)
     .insert('#Password','rootvn')
     .click('#signin_submit')
     .wait(2000)
