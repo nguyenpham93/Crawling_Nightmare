@@ -1,0 +1,12 @@
+{
+  "name": "nightmare2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "bluevn",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.3.0",
+    "shortid": "^2.2.8",
+    "vo": "^4.0.2"
+  }
+}
