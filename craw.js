@@ -103,7 +103,6 @@ nightmare
     .click('.signin')
     .wait(1000)
     .insert('#Email','systemec2017@gmail.com')
-    .wait(1000)
     .insert('#Password','rootvn')
     .click('#signin_submit')
     .wait(2000)
