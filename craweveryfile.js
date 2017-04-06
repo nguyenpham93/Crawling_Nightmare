@@ -6,6 +6,8 @@ const downloader = require('image-downloader');
 const shell = require('shelljs');
 const fs = require('fs');
 
+let realdata = [];
+
 function getOption(url,name,id){
     name = name.trim();
     let destPath = __dirname + '/img/'+ name + '_' + id;
@@ -85,6 +87,10 @@ function crawl(arr,cb){
                   shell.mkdir('-p',opt['destPath']);
                   downloader(opt);
                   res['image'] = opt['dest'];
+                  //update data every crawl time
+                  realdata.push(res);
+                  console.log(res);
+                  exportJson(realdata);
                   cb(null,res);
                }catch(err){
                   console.log('Error File not found');
@@ -109,48 +115,48 @@ nightmare
     .type('#pkeywords', 'cafe hoan kiem')
     .click('.ico-search')
     .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
-//   .click('#scrollLoadingPage')
-//   .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
+  .click('#scrollLoadingPage')
+  .wait(1000)
 //   .click('#scrollLoadingPage')
 //   .wait(1000)
 //   .click('#scrollLoadingPage')
@@ -182,14 +188,14 @@ nightmare
             let tm = res[i].querySelector('a').href;
             arr.push(tm);
         }
-        let newarr = arr.slice(10);
-        return newarr;
+        // let newarr = arr.slice(9);
+        return arr;
     })
     .end()
     .then(function (result){
         crawl(result,function(err,res){
-          console.log(res);
-          exportJson(res);
+          console.log('done!');
+        //   exportJson(res);
         });  
     })
     .catch(function (error) {
