@@ -49,62 +49,32 @@ var google = new Nightmare()
   .run(function() console.log('Done!));
 ```
 ## Form & Button
-We will automatic download a music file from website as an example
+To click button using function `.click(selector)`, example button has class `signin menu-open`
 ```
-var Nightmare = require('nightmare');
+var google = new Nightmare()
+  .goto('https://www.foody.vn/ha-noi#/places')
+  .wait()
+  .click('.signin')
+  .run(function(){
+      console.log('Done!')
+  });
+```
+![GitHub Logo](/music3.png)
 
-var mp3 = new Nightmare({show:true})
-    .viewport(1000, 1000)
-    .useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
-    .goto('http://mp3.zing.vn/bai-hat/Phia-Sau-Mot-Co-Gai-Soobin-Hoang-Son/ZW78U908.html')
-    .wait()
-    .screenshot('music1.png')
-    .run(function (err, nightmare) {
-      if (err) return console.log(err);
-      console.log('Done!');
-    });
+To login form , using `.type(selector,text)` , login field has id `Email` and password field has id `Password` and then click signin submit 
 ```
-![GitHub Logo](/music.png)
 
-Use `.click(selector)` to click to download button, buton download has id `tabService` so the code like this:
+var google = new Nightmare({show:true})
+  .goto('https://www.foody.vn/ha-noi#/places')
+  .wait()
+  .click('.signin')
+  .wait(1000)
+  .insert('#Email','systemec2017@gmail.com')
+  .type('#Password','rootvn')
+  .click('#signin_submit')
+  .wait(2000)
+  .run(function(){
+        console.log('Done!')
+  });
 ```
-var Nightmare = require('nightmare');
-
-var mp3 = new Nightmare({show:true})
-    .viewport(1000, 1000)
-    .useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
-    .goto('http://mp3.zing.vn/bai-hat/Phia-Sau-Mot-Co-Gai-Soobin-Hoang-Son/ZW78U908.html')
-    .wait()
-    .screenshot('music1.png')
-    .click('#tabService')
-    .screenshot('music2.png')
-    .run(function (err, nightmare) {
-      if (err) return console.log(err);
-      console.log('Done!');
-    });
-    });
-```
-![GitHub Logo](/music2.png)
-
-Assume we want to download 128kbs , which has class `dl-service fn-list button btn fn-128`
-```
-var Nightmare = require('nightmare');
-
-var mp3 = new Nightmare({show:true})
-    .viewport(1000, 1000)
-    .useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
-    .goto('http://mp3.zing.vn/bai-hat/Phia-Sau-Mot-Co-Gai-Soobin-Hoang-Son/ZW78U908.html')
-    .wait()
-    .screenshot('music1.png')
-    .click('#tabService')
-    .screenshot('music2.png')
-    .evaluate(function(){
-        let src = document.querySelector('dl-service fn-list button btn fn-128').href;
-     })
-    .run(function (err, nightmare) {
-      if (err) return console.log(err);
-      console.log('Done!');
-    });
-    });
-```
-```
+![GitHub Logo](/picture.png)
