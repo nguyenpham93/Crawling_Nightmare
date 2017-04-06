@@ -56,7 +56,7 @@ var Nightmare = require('nightmare');
 var mp3 = new Nightmare({show:true})
     .viewport(1000, 1000)
     .useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
-    .goto('http://mp3.zing.vn/bai-hat/Fly-Love-Jamie-Foxx/IW7A0UBZ.html')
+    .goto('http://mp3.zing.vn/bai-hat/Phia-Sau-Mot-Co-Gai-Soobin-Hoang-Son/ZW78U908.html')
     .wait()
     .screenshot('music1.png')
     .run(function (err, nightmare) {
@@ -64,5 +64,47 @@ var mp3 = new Nightmare({show:true})
       console.log('Done!');
     });
 ```
-![GitHub Logo](/temp/music.png)
+![GitHub Logo](/music.png)
 
+Use `.click(selector)` to click to download button, buton download has id `tabService` so the code like this:
+```
+var Nightmare = require('nightmare');
+
+var mp3 = new Nightmare({show:true})
+    .viewport(1000, 1000)
+    .useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
+    .goto('http://mp3.zing.vn/bai-hat/Phia-Sau-Mot-Co-Gai-Soobin-Hoang-Son/ZW78U908.html')
+    .wait()
+    .screenshot('music1.png')
+    .click('#tabService')
+    .screenshot('music2.png')
+    .run(function (err, nightmare) {
+      if (err) return console.log(err);
+      console.log('Done!');
+    });
+    });
+```
+![GitHub Logo](/music2.png)
+
+Assume we want to download 128kbs , which has class `dl-service fn-list button btn fn-128`
+```
+var Nightmare = require('nightmare');
+
+var mp3 = new Nightmare({show:true})
+    .viewport(1000, 1000)
+    .useragent("Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36")
+    .goto('http://mp3.zing.vn/bai-hat/Phia-Sau-Mot-Co-Gai-Soobin-Hoang-Son/ZW78U908.html')
+    .wait()
+    .screenshot('music1.png')
+    .click('#tabService')
+    .screenshot('music2.png')
+    .evaluate(function(){
+        let src = document.querySelector('dl-service fn-list button btn fn-128').href;
+     })
+    .run(function (err, nightmare) {
+      if (err) return console.log(err);
+      console.log('Done!');
+    });
+    });
+```
+```
